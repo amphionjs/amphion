@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+*.tgz
+.turbo/
+
+# Tests
+coverage/
+
+# Docs build
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+.env
+.env.*
+!.env.example
+
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+
+# AI agents: personal files only.
+# AGENTS.md, CLAUDE.md, .claude/settings.json, .claude/skills/ and .mcp.json ARE committed.
+CLAUDE.local.md
+.claude/settings.local.json
