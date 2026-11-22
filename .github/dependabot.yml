@@ -15,6 +15,11 @@ updates:
     # Matches minimumReleaseAge in pnpm-workspace.yaml: let new releases settle first.
     cooldown:
       default-days: 1
+    ignore:
+      # @types/node follows the minimum supported Node.js version (24), so the compiler rejects
+      # APIs that only exist in newer versions. Raise it by hand when the minimum changes.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     groups:
       dev-tooling:
         dependency-type: development
