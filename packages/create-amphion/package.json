@@ -1,0 +1,33 @@
+{
+  "name": "create-amphion",
+  "version": "0.0.1",
+  "description": "Create a new Amphion app: the Laravel-style framework for Node.js. Scaffolds the project structure.",
+  "type": "module",
+  "bin": {
+    "create-amphion": "index.js"
+  },
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "scaffold",
+    "create"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphion/amphion.git",
+    "directory": "packages/create-amphion"
+  },
+  "homepage": "https://github.com/amphion/amphion/tree/main/packages/create-amphion",
+  "bugs": "https://github.com/amphion/amphion/issues"
+}
