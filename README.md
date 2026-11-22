@@ -1,14 +1,16 @@
-# Nima.js
+# Amphion
  
 **A TypeScript-first Node.js framework with the developer experience of Laravel.**
  
-Nima.js brings Laravel's ideas to Node.js: a service container, service providers, an Eloquent-style ORM, Artisan-style commands, queues, events, mail and more. It is built for modern Node.js, with TypeScript, ES modules and secure defaults from the start.
+In Greek myth, Amphion built the walls of Thebes by playing his lyre, and the stones moved into place by themselves. That is the idea behind this framework: you write expressive code, and the heavy lifting falls into place.
  
-> **Status: pre-alpha.** Nima.js is in early development and is not ready for production. The APIs shown below are the target design and may change before the first release.
+Amphion brings Laravel's ideas to Node.js: a service container, service providers, an Eloquent-style ORM, Artisan-style commands, queues, events, mail and more. It is built for modern Node.js, with TypeScript, ES modules and secure defaults from the start.
  
-## Why Nima.js?
+> **Status: pre-alpha.** Amphion is in early development and is not ready for production. The APIs shown below are the target design and may change before the first release.
  
-- **Feels like Laravel.** The same folder structure, naming and fluent APIs. If you know Laravel, you already know most of Nima.js.
+## Why Amphion?
+ 
+- **Feels like Laravel.** The same folder structure, naming and fluent APIs. If you know Laravel, you already know most of Amphion.
 - **Type-safe end to end.** Routes, config, environment variables, validation output and model attributes are all typed, so many mistakes are caught before your code runs.
 - **Secure by default.** Escaped templates, CSRF protection, encrypted cookies, argon2id password hashing, strict CORS and no stack traces in production. To turn security features off, you have to opt out explicitly.
 - **No build step in development.** Your app's `.ts` files run directly through Node.js's built-in type stripping. Restarts are instant.
@@ -19,13 +21,25 @@ Nima.js brings Laravel's ideas to Node.js: a service container, service provider
 - pnpm, npm or yarn
 - PostgreSQL, MySQL/MariaDB or SQLite
 - Redis (optional, for queues, cache and sessions)
+## Getting started
+ 
+Available with the first release (v0.1):
+ 
+```bash
+npm create amphion@latest my-app
+cd my-app
+node lyre.ts serve
+```
+ 
+All official packages live under the `@amphion` scope on npm. The unscoped `amphion` package on npm is an unrelated project.
+ 
 ## Quick look
  
 ### Routes
  
 ```ts
 // routes/web.ts
-import { Route } from '@nimajs/http'
+import { Route } from '@amphion/http'
 import PostsController from '#app/Http/Controllers/PostsController.ts'
  
 Route.get('/', ({ view }) => view.render('welcome'))
@@ -41,7 +55,7 @@ Route.group({ prefix: '/dashboard', middleware: ['auth'] }, () => {
  
 ```ts
 // app/Http/Controllers/PostsController.ts
-import type { HttpContext } from '@nimajs/http'
+import type { HttpContext } from '@amphion/http'
 import Post from '#app/Models/Post.ts'
 import StorePostRequest from '#app/Http/Requests/StorePostRequest.ts'
  
@@ -68,7 +82,7 @@ export default class PostsController {
  
 ```ts
 // app/Http/Requests/StorePostRequest.ts
-import { FormRequest, vine } from '@nimajs/validator'
+import { FormRequest, vine } from '@amphion/validator'
  
 export default class StorePostRequest extends FormRequest {
   authorize() {
@@ -89,7 +103,7 @@ export default class StorePostRequest extends FormRequest {
  
 ```ts
 // app/Models/Post.ts
-import { Model, belongsTo, hasMany } from '@nimajs/orm'
+import { Model, belongsTo, hasMany } from '@amphion/orm'
 import User from '#app/Models/User.ts'
 import Comment from '#app/Models/Comment.ts'
  
@@ -116,7 +130,7 @@ export default class Post extends Model {
  
 ```ts
 // database/migrations/2026_11_22_000000_create_posts_table.ts
-import { Migration, Schema } from '@nimajs/database'
+import { Migration, Schema } from '@amphion/database'
  
 export default class extends Migration {
   async up() {
@@ -140,8 +154,8 @@ export default class extends Migration {
  
 ```ts
 // app/Services/ReportService.ts
-import { Logger } from '@nimajs/logger'
-import { Cache } from '@nimajs/cache'
+import { Logger } from '@amphion/logger'
+import { Cache } from '@amphion/cache'
  
 export default class ReportService {
   static inject = [Logger, Cache] as const
@@ -156,14 +170,14 @@ export default class ReportService {
 }
 ```
  
-The container reads `static inject` to resolve constructor arguments. Nima.js avoids decorators so your code runs with Node.js's native type stripping, with no compiler in between.
+The container reads `static inject` to resolve constructor arguments. Amphion avoids decorators so your code runs with Node.js's native type stripping, with no compiler in between.
  
 ### Queued jobs
  
 ```ts
 // app/Jobs/SendWelcomeEmail.ts
-import { Job } from '@nimajs/queue'
-import { Mail } from '@nimajs/mail'
+import { Job } from '@amphion/queue'
+import { Mail } from '@amphion/mail'
 import WelcomeMail from '#app/Mail/WelcomeMail.ts'
 import User from '#app/Models/User.ts'
  
@@ -190,13 +204,15 @@ await dispatch(new SendWelcomeEmail(user.id)).onQueue('mail').delay('5m')
  
 ### The CLI
  
+Amphion's command line is called **lyre**, after Amphion's lyre. It is the counterpart of Laravel's `artisan`.
+ 
 ```bash
-node nima.ts make:model Post --migration --factory
-node nima.ts make:controller Posts --resource
-node nima.ts migrate
-node nima.ts route:list
-node nima.ts queue:work
-node nima.ts tinker
+node lyre.ts make:model Post --migration --factory
+node lyre.ts make:controller Posts --resource
+node lyre.ts migrate
+node lyre.ts route:list
+node lyre.ts queue:work
+node lyre.ts tinker
 ```
  
 ## Project structure
@@ -215,7 +231,7 @@ my-app/
   storage/
   tests/Feature/  tests/Unit/
   .env
-  nima.ts
+  lyre.ts               # the CLI, like Laravel's artisan
   server.ts
 ```
  
@@ -246,9 +262,9 @@ my-app/
  
 ## Coming from Laravel
  
-| Laravel | Nima.js |
+| Laravel | Amphion |
 | --- | --- |
-| `php artisan make:model` | `node nima.ts make:model` |
+| `php artisan make:model` | `node lyre.ts make:model` |
 | `Route::get()` | `Route.get()` |
 | `User::where('active', 1)->get()` | `await User.where('active', true).get()` |
 | `$request->validated()` | `await request.validated()` |
@@ -261,15 +277,15 @@ The biggest difference: database, cache and queue calls are asynchronous in Node
  
 ## Security
  
-Security is a core feature of Nima.js, not an add-on. If you find a security vulnerability, **please do not open a public issue.** Report it privately through [GitHub Security Advisories](../../security/advisories/new) on this repository. You will get a response as quickly as possible, and the fix will be credited to you if you wish.
+Security is a core feature of Amphion, not an add-on. If you find a security vulnerability, **please do not open a public issue.** Report it privately through [GitHub Security Advisories](../../security/advisories/new) on this repository. You will get a response as quickly as possible, and the fix will be credited to you if you wish.
  
 ## Contributing
  
-Nima.js is not accepting outside contributions yet, while the core design is still settling. Issues with feedback, ideas and bug reports are welcome. Contribution guidelines will be published before the first public beta.
+Amphion is not accepting outside contributions yet, while the core design is still settling. Issues with feedback, ideas and bug reports are welcome. Contribution guidelines will be published before the first public beta.
  
 ## License
  
-Nima.js is open-source software licensed under the [MIT license](LICENSE).
+Amphion is open-source software licensed under the [MIT license](LICENSE).
  
 Copyright (c) 2026 Nima Sayadi
  
