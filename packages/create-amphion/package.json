@@ -1,6 +1,6 @@
 {
   "name": "create-amphion",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create a new Amphion app: the Laravel-style framework for Node.js. Scaffolds the project structure.",
   "type": "module",
   "bin": {
