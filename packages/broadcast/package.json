@@ -1,0 +1,54 @@
+{
+  "name": "@amphion/broadcast",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Broadcasting and a Pusher-protocol WebSocket server that works with Laravel Echo. Part of the Amphion framework for Node.js.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "amphion-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@amphion/core": "workspace:^",
+    "@amphion/queue": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "broadcast"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
+    "directory": "packages/broadcast"
+  },
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/broadcast",
+  "bugs": "https://github.com/amphionjs/amphion/issues",
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}

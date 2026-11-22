@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    // Repo scripts and config files are not published, so they need no declaration output.
+    "declaration": false,
+    "declarationMap": false,
+    "isolatedDeclarations": false
+  },
+  "include": ["scripts/**/*.ts", "tests/**/*.ts", "vitest.config.ts"]
+}

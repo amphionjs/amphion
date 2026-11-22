@@ -1,0 +1,53 @@
+{
+  "name": "@amphion/inertia",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Inertia.js server adapter for Vue, React and Svelte frontends. Part of the Amphion framework for Node.js.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "amphion-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@amphion/http": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "inertia"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
+    "directory": "packages/inertia"
+  },
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/inertia",
+  "bugs": "https://github.com/amphionjs/amphion/issues",
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}

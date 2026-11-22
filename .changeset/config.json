@@ -1,0 +1,16 @@
+{
+  "changelog": "@changesets/changelog-git",
+  "commit": false,
+  "format": false,
+  "baseBranch": "master",
+  "access": "public",
+  "updateInternalDependencies": "patch",
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
+  "privatePackages": {
+    "version": false,
+    "tag": false
+  },
+  "fixed": [],
+  "linked": [],
+  "ignore": []
+}

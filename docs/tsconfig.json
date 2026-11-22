@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "isolatedDeclarations": false,
+    "lib": ["es2024", "dom"]
+  },
+  "include": [".vitepress/**/*.ts"],
+  "exclude": [".vitepress/cache", ".vitepress/dist"]
+}

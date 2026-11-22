@@ -7,20 +7,36 @@ Status: pre-alpha. Many packages and commands below are planned. If a command or
 ## Repository layout
 
 - `packages/<name>/`: one npm package per folder, published as `@amphion/<name>` (exception: `packages/create-amphion`, published as `create-amphion`).
-- `docs/`: the documentation site (VitePress), added in Phase 0.
-- `apps/playground/`: a real app used to try every feature by hand, added in Phase 0.
+- `apps/playground/`: a real app used to try every feature by hand.
+- `docs/`: the documentation site (VitePress).
+- `benchmarks/`: micro-benchmarks (mitata) and HTTP benchmarks (autocannon).
+- `scripts/`: repo scripts, the package template (`scripts/templates/package/`) and the layer map (`scripts/layers.ts`).
+- `tests/repo/`: tests for repository conventions.
+
+Unreleased packages are scaffolds: `"private": true`, version `0.0.0`, and a `src/index.ts` comment that names the phase that builds them. Remove `private` only when a package is ready for its first release.
 
 ## Commands
 
 Run from the repository root:
 
 - `pnpm install`: install dependencies
-- `pnpm build`: compile all packages with `tsc`
+- `pnpm build`: compile all packages with `tsc` into `dist/` (Turborepo, in dependency order)
 - `pnpm typecheck`: type-check everything without emitting
-- `pnpm test`: run all tests (Vitest)
-- `pnpm lint`: lint and format check (Biome)
+- `pnpm --filter @amphion/<name> typecheck`: type-check one package
+- `pnpm test`: run all tests (Vitest); `pnpm test packages/<name>` runs one package, or pass one test file
+- `pnpm lint`: lint and format check (Biome); `pnpm format` applies the fixes
+- `pnpm new:package <name> --description "..." --deps core`: scaffold a package (never create one by hand)
+- `pnpm changeset`: record a change to a published package
+- `pnpm bench`, `pnpm bench:http`: benchmarks
+- `pnpm docs:dev`: run the docs site locally
 
 Run the narrowest check first (one package, one test file), then the full suite before you finish.
+
+## Packages and layers
+
+1. Every package belongs to a layer in `scripts/layers.ts`: kernel → transport → data → security → presentation → services → tooling. A package depends only on packages in its own layer or a lower one, never in a cycle. `tests/repo/packages.test.ts` enforces this.
+2. Internal dependencies use `workspace:^`. Shared dev tool versions live in the `catalog:` in `pnpm-workspace.yaml`.
+3. Inside the repo, packages resolve to their TypeScript source through the `amphion-source` export condition, so tests, type checks and the playground never need a build. Published packages ship only compiled `dist/`.
 
 ## Hard rules for TypeScript
 

@@ -25,9 +25,9 @@
   "author": "Nima Sayadi",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amphion/amphion.git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
     "directory": "packages/create-amphion"
   },
-  "homepage": "https://github.com/amphion/amphion/tree/main/packages/create-amphion",
-  "bugs": "https://github.com/amphion/amphion/issues"
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/create-amphion",
+  "bugs": "https://github.com/amphionjs/amphion/issues"
 }

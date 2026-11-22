@@ -1,0 +1,54 @@
+{
+  "name": "@amphion/http",
+  "version": "0.0.0",
+  "private": true,
+  "description": "HTTP server, router, Request, Response, cookies, middleware pipeline and exception handler. Part of the Amphion framework for Node.js.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "amphion-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@amphion/core": "workspace:^",
+    "@amphion/encryption": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "http"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
+    "directory": "packages/http"
+  },
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/http",
+  "bugs": "https://github.com/amphionjs/amphion/issues",
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}

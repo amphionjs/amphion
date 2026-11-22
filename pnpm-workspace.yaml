@@ -1,0 +1,27 @@
+packages:
+  - packages/*
+  - apps/*
+  - docs
+  - benchmarks
+
+# Shared versions. Reference them with "catalog:" in any package.json.
+catalog:
+  '@biomejs/biome': 2.6.8
+  '@changesets/changelog-git': 1.0.0
+  '@changesets/cli': 3.0.3
+  '@types/autocannon': 7.12.7
+  '@types/node': ^24.19.2
+  autocannon: 9.0.0
+  mitata: 1.0.34
+  turbo: 2.11.13
+  typescript: 7.0.2
+  vitepress: 1.6.4
+  vitest: 5.1.1
+
+# Supply-chain guards.
+# Dependency install scripts are blocked unless listed here (approve with `pnpm approve-builds <pkg>`).
+allowBuilds:
+  esbuild: true # VitePress's bundler downloads its native binary
+
+# Never install a version published less than a day ago.
+minimumReleaseAge: 1440

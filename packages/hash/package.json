@@ -1,0 +1,53 @@
+{
+  "name": "@amphion/hash",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Password hashing manager with argon2id (default), bcrypt and scrypt drivers. Part of the Amphion framework for Node.js.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "amphion-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@amphion/core": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "hash"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
+    "directory": "packages/hash"
+  },
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/hash",
+  "bugs": "https://github.com/amphionjs/amphion/issues",
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}

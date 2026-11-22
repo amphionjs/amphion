@@ -1,0 +1,53 @@
+{
+  "name": "@amphion/scheduler",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Task scheduler with cron expressions, time zones and single-server locks. Part of the Amphion framework for Node.js.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "amphion-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@amphion/core": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "amphion",
+    "framework",
+    "laravel",
+    "scheduler"
+  ],
+  "license": "MIT",
+  "author": "Nima Sayadi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amphionjs/amphion.git",
+    "directory": "packages/scheduler"
+  },
+  "homepage": "https://github.com/amphionjs/amphion/tree/master/packages/scheduler",
+  "bugs": "https://github.com/amphionjs/amphion/issues",
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+}

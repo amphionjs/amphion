@@ -1,6 +1,6 @@
 # create-amphion
 
-Scaffold a new [Amphion](https://github.com/amphion/amphion) app. Amphion is a TypeScript-first Node.js framework with the developer experience of Laravel.
+Scaffold a new [Amphion](https://github.com/amphionjs/amphion) app. Amphion is a TypeScript-first Node.js framework with the developer experience of Laravel.
 
 ```bash
 npm create amphion@latest my-app

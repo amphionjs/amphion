@@ -1,0 +1,22 @@
+{
+  "name": "playground",
+  "private": true,
+  "description": "A real Amphion app for trying every feature by hand while the framework is built.",
+  "type": "module",
+  "imports": {
+    "#app/*": "./app/*",
+    "#config/*": "./config/*"
+  },
+  "scripts": {
+    "dev": "node --watch --conditions=amphion-source server.ts",
+    "start": "node server.ts",
+    "smoke": "node --conditions=amphion-source smoke.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@amphion/core": "workspace:^"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "amphion-monorepo",
+  "private": true,
+  "type": "module",
+  "description": "Amphion: a TypeScript-first Node.js framework with the developer experience of Laravel.",
+  "license": "MIT",
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "turbo run build --filter=./packages/*",
+    "typecheck": "turbo run typecheck && tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "changeset": "changeset",
+    "release": "turbo run build --filter=./packages/* && node scripts/stage-release.ts",
+    "bench": "pnpm --filter @amphion/benchmarks bench",
+    "bench:http": "pnpm --filter @amphion/benchmarks bench:http",
+    "docs:dev": "pnpm --filter @amphion/docs dev",
+    "docs:build": "pnpm --filter @amphion/docs build",
+    "new:package": "node scripts/new-package.ts",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@changesets/changelog-git": "catalog:",
+    "@changesets/cli": "catalog:",
+    "@types/node": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

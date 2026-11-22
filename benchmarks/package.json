@@ -1,0 +1,19 @@
+{
+  "name": "@amphion/benchmarks",
+  "private": true,
+  "description": "Micro-benchmarks (mitata) and HTTP load benchmarks (autocannon) for Amphion.",
+  "type": "module",
+  "scripts": {
+    "bench": "node micro/run.ts",
+    "bench:http": "node http/hello.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/autocannon": "catalog:",
+    "autocannon": "catalog:",
+    "mitata": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
