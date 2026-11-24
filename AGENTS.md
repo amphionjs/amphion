@@ -44,18 +44,21 @@ Run the narrowest check first (one package, one test file), then the full suite 
 2. Erasable syntax only, because apps run `.ts` files through Node's type stripping: no `enum`, no namespaces with values, no parameter properties (`constructor(private x: X)`), no decorators. The `erasableSyntaxOnly` compiler flag enforces this.
 3. Type-only imports use `import type`.
 4. Relative imports include the file extension: `import { Router } from './router.ts'`.
-5. Dependency injection uses a static list, never decorators:
+5. Dependency injection uses static lists, never decorators. `static inject` lists constructor dependencies; `static methods` lists extra method dependencies for `container.call()` (the caller's arguments come first):
    ```ts
    export default class ReportService {
      static inject = [Logger, Cache] as const
+     static methods = { export: [Exporter] } as const
      log: Logger
      cache: Cache
      constructor(log: Logger, cache: Cache) {
        this.log = log
        this.cache = cache
      }
+     export(ctx: HttpContext, exporter: Exporter) {}
    }
    ```
+   Framework packages and generator stubs always use this style. App code may also use `resolve(Token)` in field initializers and default parameters (`posts = resolve(PostService)`).
 6. Never store request data in a singleton. Per-request state goes through the request context (`AsyncLocalStorage`).
 7. ORM model attributes are declared with `declare` (`declare email: string`), so class fields never shadow the ORM's accessors.
 8. Public APIs have explicit types (`isolatedDeclarations` is on).

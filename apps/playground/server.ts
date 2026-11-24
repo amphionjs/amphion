@@ -1,19 +1,37 @@
-// HTTP entry of the playground. Until @amphion/http exists (Phase 2), this is plain node:http.
-import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http'
-import { greeting } from '#app/greeting.ts'
-import config from '#config/app.ts'
+// HTTP entry of the playground. The app boots through @amphion/core; serving is still plain
+// node:http until @amphion/http exists (Phase 2).
+import { createServer, type Server } from 'node:http'
+import type { AddressInfo } from 'node:net'
+import { config } from '@amphion/core'
+import Greeter from '#app/Services/Greeter.ts'
+import app from '#bootstrap/app.ts'
 
-export function handle(_request: IncomingMessage, response: ServerResponse): void {
-  response.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' })
-  response.end(greeting(config.name))
-}
+/** Boots the app and returns a server that is not listening yet. */
+export async function createPlaygroundServer(): Promise<Server> {
+  await app.boot()
+  const greeter = app.make(Greeter)
 
-export function createPlaygroundServer(): Server {
-  return createServer(handle)
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' })
+    response.end(greeter.greet())
+  })
+
+  // On shutdown: stop accepting connections, let in-flight requests finish, close idle sockets.
+  app.terminating(
+    () =>
+      new Promise<void>((resolve) => {
+        server.close(() => resolve())
+        server.closeIdleConnections()
+      }),
+  )
+  return server
 }
 
 if (import.meta.main) {
-  createPlaygroundServer().listen(config.port, () => {
-    console.log(`${config.name} listening on http://localhost:${config.port}`)
+  const server = await createPlaygroundServer()
+  server.listen(config('app.port'), () => {
+    const { port } = server.address() as AddressInfo
+    console.log(`${config('app.name')} listening on http://localhost:${port}`)
   })
+  await app.start()
 }

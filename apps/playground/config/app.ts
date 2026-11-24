@@ -1,11 +1,8 @@
-export interface AppConfig {
-  name: string
-  port: number
-}
+import { defineConfig } from '@amphion/core'
+import env from '#bootstrap/env.ts'
 
-const config: AppConfig = {
-  name: 'Amphion Playground',
-  port: Number(process.env.PORT ?? 3000),
-}
-
-export default config
+export default defineConfig({
+  name: env.get('APP_NAME'),
+  env: env.get('APP_ENV'),
+  port: env.get('PORT'),
+})

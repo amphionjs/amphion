@@ -16,6 +16,22 @@ export default defineConfig({
         items: [{ text: 'Introduction', link: '/guide/introduction' }],
       },
       {
+        text: 'The basics',
+        items: [
+          { text: 'Application and providers', link: '/guide/providers' },
+          { text: 'Service container', link: '/guide/container' },
+          { text: 'Configuration', link: '/guide/configuration' },
+          { text: 'Exceptions', link: '/guide/errors' },
+        ],
+      },
+      {
+        text: 'Helpers',
+        items: [
+          { text: 'Strings and arrays', link: '/guide/helpers' },
+          { text: 'Collections', link: '/guide/collections' },
+        ],
+      },
+      {
         text: 'Contributing',
         items: [
           { text: 'Development setup', link: '/contributing/development' },
